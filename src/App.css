@@ -1,38 +1,70 @@
-.App {
+.header {
+  background-color: brown;
+}
+.all_tables {
+  background-color: aliceblue;
+  
+}
+.single_bill {
+  background-color: rgb(211, 101, 101);
+  height: 100vh;
+}
+
+.table_box {
+  background-color: aqua;
+  margin: 2px;
+  border-radius: 12px;
+}
+.add_table {
+  width: 100%;
+  background-color: brown;
+  color: #fff;
+  border: #fff;
+  border-radius:0px 12px ;
+  padding: 8px;
+}
+.add_product {
+  width: 100%;
+  background-color: brown;
+  color: #fff;
+  border: #fff;
+  border-radius:0px 12px ;
+  padding: 8px;
+  font-family: emoji;
+  font-weight: 600;
+}
+.product_box {
+  background-color: aqua;
+  margin: 2px;
+  border-radius: 12px;
+}
+.add_product_back {
+  width: 100%;
+  background-color:aqua;
+  color:black;
+  border: #fff;
+  border-radius:0px 12px ;
+  padding: 8px;
+  font-family: emoji;
+  font-weight:400;
+}
+.hide {
+  width: 100%;
+  background-color:aqua;
+  color:aqua;
+  border: #fff;
+  border-radius:0px 12px ;
+  padding: 8px;
+  font-family: emoji;
+  font-weight:400;
+}
+.bill table, th, td  {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.bill table th {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bill table td,th {
+ padding:6px;
 }
