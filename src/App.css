@@ -1,46 +1,67 @@
+:root {
+  --main-color:#243763;
+  --prime-color:#AD8E70;
+  --fist-color:#98DFD6;
+  --second-color:#FFEBB7;
+}
+body {
+  font-family:'Courier New', Courier, monospace;
+}
+a {
+  color: #fff;
+}
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
 .header {
-  background-color: brown;
+  background-color:var(--main-color);
 }
 .all_tables {
-  background-color: aliceblue;
+  background-color:white;
   
 }
 .single_bill {
-  background-color: rgb(211, 101, 101);
+  background-color:white;
   height: 100vh;
 }
-
+.mt-2, .my-2 {
+  margin-top: 0!important;
+}
 .table_box {
-  background-color: aqua;
+  background-color:var(--fist-color);
   margin: 2px;
   border-radius: 12px;
 }
 .add_table {
   width: 100%;
-  background-color: brown;
+  background-color:var(--main-color);
   color: #fff;
   border: #fff;
   border-radius:0px 12px ;
   padding: 8px;
+  outline: none;
 }
 .add_product {
   width: 100%;
-  background-color: brown;
+  background-color:var(--main-color);
   color: #fff;
   border: #fff;
   border-radius:0px 12px ;
   padding: 8px;
   font-family: emoji;
   font-weight: 600;
+  outline: none;
+
 }
 .product_box {
-  background-color: aqua;
+  background-color:var(--fist-color);
   margin: 2px;
   border-radius: 12px;
 }
 .add_product_back {
   width: 100%;
-  background-color:aqua;
+  background-color:var(--fist-color);
   color:black;
   border: #fff;
   border-radius:0px 12px ;
@@ -50,13 +71,15 @@
 }
 .hide {
   width: 100%;
-  background-color:aqua;
-  color:aqua;
-  border: #fff;
+  background-color:var(--fist-color);
+  color:var(--fist-color);
+  border:var(--main-color);
   border-radius:0px 12px ;
   padding: 8px;
   font-family: emoji;
   font-weight:400;
+  outline: none;
+
 }
 .bill table, th, td  {
   border: 1px solid black;
@@ -67,4 +90,260 @@
 }
 .bill table td,th {
  padding:6px;
+}
+.add_table_free{
+  width: 100%;
+  background-color:greenyellow;
+  color: #fff;
+  border: #fff;
+  border-radius:0px 12px ;
+  padding: 8px;
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  color: white;
+  fill: currentColor;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.5rem;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #d9edff;
+}
+.login-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  max-width: 1000px;
+  background-color: white;
+  box-shadow: 0 0 40px rgba(0,0,0,0.16);
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+#login-form {
+  flex: 1 0 100%;
+  max-width: 480px;
+  width: 100%;
+  padding: 60px;
+}
+#login-form p {
+  margin-bottom: 30px;
+}
+#login-form p.form-title {
+  color: #333333;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 0;
+}
+#login-form .ant-form-item-label > label.ant-form-item-required::before {
+  display: none;
+}
+.ant-form-item-control-input-content {
+  text-align: left;
+}
+#login-form .ant-input-affix-wrapper {
+  padding: 12px 15px;
+}
+#login-form_username {
+  height: 48px;
+}
+#login-form .ant-btn {
+  height: 42px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+}
+.login-form-button {
+  width: 100%;
+}
+.illustration-wrapper {
+  display: flex;
+  align-items: flex-end;
+  max-width: 800px;
+  min-height: 100%;
+  background-color: #fffdf2;
+}
+.illustration-wrapper img {
+  display: block;
+  width: 100%;
+}
+@media screen and (max-width: 1023px) {
+  .login-box {
+    flex-direction: column;
+    box-shadow: none;
+  }
+  .illustration-wrapper {
+    max-width: 100%;
+    min-height: auto;
+  }
+  #login-form {
+    max-width: 100%;
+  }
+}
+.css-1f2xuhi-MuiDrawer-docked .MuiDrawer-paper {
+  width: 240px;
+  box-sizing: border-box;
+  background:var(--main-color);
+  color:white;
+}
+.total{
+  display: flex;
+ list-style: none;
+}
+.total li {
+  width:200px;
+  margin: 1%;
+}
+.billbox{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 5%;
+  margin-top: 10%;
+
+
+}
+
+.paymentlogo{
+  width: 50px;
+  height: 50px;
+  margin-top: -10px;
+  margin-left: 20px;
+  margin-bottom: 5%;
+}
+
+.paymentimage{
+  width: 100%;
+}
+.h1div{
+  display: flex;
+  justify-content: center;
+  
+}
+.tabbox{
+  display: flex;
+  justify-content: center;
+  
+}
+
+
+
+
+/* CSS */
+.buttondiv{
+  text-align: center;
+  width: 450px;
+  margin-top: 20px;
+}
+.button-62 {
+  background: linear-gradient(to bottom right, rgb(48, 65, 167), #080808);
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+ 
+ 
+}
+
+.button-62:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(74, 219, 224, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-62:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(74, 219, 224, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+.salelogo{
+  height: 35px;
+  width: 35px;
+}
+.saleimage{
+  width: 100%;
+}
+.cercle{
+  background-color: var(--main-color);
+  color: white;
+  margin-top:24px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  align-items: center;
+  flex-direction: column;
+display: flex;
+justify-content:center;
+padding:60px ;
+}
+.rowbox{
+  margin-top:24px;
+  
+
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+.banner {
+  background-image: url('./bann.png');
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+    justify-content: start;
+    align-items: center;
+  
+}
+.form {
+  padding-top: 25%;
+  width:320px;
+  padding:40px;
+  height: 300px;
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 12px;
+}
+.form-outline input {
+  width: 100%;
+}
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+.btn-primary {
+  color: #fff;
+  background-color:var(--fist-color);
+  border-color:var(--fist-color);
+  color: #080808;
+  cursor: pointer;
 }

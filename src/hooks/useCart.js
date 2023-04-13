@@ -1,22 +1,46 @@
-import React, { createContext, useContext, useReducer } from "react";
-import reducer from "./cartReducer";
-
+import React, { createContext, useContext,useState,useEffect } from "react";
+import {  signInWithEmailAndPassword ,onAuthStateChanged,signOut} from "firebase/auth";
+import { auth, db } from "../firebase";
 const AuthContext = createContext({});
 
 
 export const AuthProvider = ({ children }) => {
    
-    const initialState = {
-        table : [],
-        
-    }
+    const [input, setInput] = useState("")
+    const [user,setUser] = useState(null)
     
-    const [state, dispatch] = useReducer(reducer,initialState)
+    console.log(user);
+    const login =(email,password)=>{
+        signInWithEmailAndPassword(auth,email,password)
+        .then((result) => {
+        setUser(result)
+
+      })
+      .catch(() => {
+        alert('User Wrong')
+      });
+    }
+
+    const logout = () => {
+      return signOut(auth).then((user) => {
+        setUser(user)
+      });
+    };
+
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+      });
+      return unsubscribe;
+    }, []);
     
     return (
         <AuthContext.Provider
             value={{
-            ...state,dispatch
+                user,
+                login,
+                logout,
+            input,setInput
             }}
         >
             {children}

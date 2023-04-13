@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import useCart from './hooks/useCart';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -36,7 +37,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    border: '1px solid #FFA500',
+    border: '1px solid #243763',
     borderRadius:'30px',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -49,14 +50,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const {input,setInput} = useCart()
+ 
   return (
         <Toolbar>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon style={{color:"gray"}} />
             </SearchIconWrapper>
             <StyledInputBase
+              onChange={(e)=>setInput(e.target.value)}
               placeholder="Search…"
+              value={input}
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
