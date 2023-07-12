@@ -79,7 +79,7 @@ const Menu = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {[<Link to="/">Home</Link>, <Link to="/sale-report">Sale Report</Link>, 'Send email', 'Drafts'].map((text, index) => (
+          {[<Link to="/">Home</Link>, <Link to="/sale-report">Sale Report</Link>, 'Send email', <Link to="/add-product">Add Product</Link>].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>

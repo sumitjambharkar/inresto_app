@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import { db } from './firebase'
+import useCart from './hooks/useCart'
 
 const Sale = () => {
+    const {user}  = useCart()
     const [data, setData] = useState([])
     const [cash, setCash] = useState("")
     const [card, setCard] = useState("")
@@ -13,7 +15,7 @@ const Sale = () => {
     const [total, setTotal] = useState('')
 
     useEffect(() => {
-        db.collection('bill').orderBy("time", "desc").onSnapshot(snapshot => (
+        db.collection("restaurants").doc(user.uid).collection('bill').orderBy("time", "asc").onSnapshot(snapshot => (
             setData(snapshot.docs.map((doc) => doc.data()))
         ))
     }, [])
@@ -98,7 +100,7 @@ const Sale = () => {
                          <tr key={ele.table}>
                             <td>{i + 1}</td>
                             <td>sumit</td>
-                            <td>Table {ele.table.slice(5, 9)}</td>
+                            <td>Table {ele.table}</td>
                             <td>{ele.time?.toDate().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
                             <td>{ele.payment}</td>
                             <td>{ele.total}</td>

@@ -1,18 +1,32 @@
-import React from "react"
+import React, { useState,useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
 import Tab from "./Tab";
 import Header from "./Header";
+import useCart from "./hooks/useCart";
+import { db } from "./firebase";
 
 const Home = () => {
-
+    
+    const {user}  = useCart()
+    const [table,setTable] = useState([])
+    console.log(table,"jj");
     const navigate = useNavigate()
+
+    useEffect(() => {
+    db.collection("restaurants").doc(user.uid).collection("table").onSnapshot(snapshot=>(
+        setTable(snapshot.docs.map(doc=>({id:doc.id,data:doc.data()})))
+    ))
+    },[user.uid])
+    
     
     const addTable = (doc) => {
-        navigate(`/dish/${doc}`)
-
-    }
-    
-    const arr = [{id:"1",name:"table1"},{id:"2",name:"table2"},{id:"3",name:"table3"},{id:"4",name:"table4"},{id:"5",name:"table5"},{id:"6",name:"table6"},{id:"7",name:"table7"},{id:"8",name:"table8"},{id:"9",name:"table9"},{id:"1",name:"table1"}]
+        navigate(`/dish/${doc.data.name}`)
+        db.collection('restaurants').doc(user.uid).collection("table").doc(doc.id).set({
+            name: doc.data.name,
+            isOnline: true
+        }); 
+      };
+      
    
     
     return (
@@ -23,11 +37,11 @@ const Home = () => {
                 <div className='all_tables col-lg-8 col-md-8 col-sm-12 mt-2'>
                     <Tab />
                     <div className='row'>
-                        {arr.map((doc) => (
-                            <div key={doc.id} className='table col-3'><div className='table_box'>
+                        {table.map((doc) => (
+                            <div key={doc.id} className='table col-3'><div className="table_box">
+                             <button className='hide'>.</button>
                                 <button className='hide'>.</button>
-                                <button className='hide'>.</button>
-                                <button onClick={() => addTable(doc.name)} className='add_table'>Table {doc.name.slice(5,6)}</button>
+                                <button style={{cursor:"pointer"}} onClick={() => addTable(doc)} className='add_table'>Table {doc.data.name}</button>
                             </div></div>
                         ))}
                     </div>

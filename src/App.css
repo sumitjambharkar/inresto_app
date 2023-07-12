@@ -33,6 +33,11 @@ a:hover {
   margin: 2px;
   border-radius: 12px;
 }
+.running_table_box {
+  background-color:red;
+  margin: 2px;
+  border-radius: 12px;
+}
 .add_table {
   width: 100%;
   background-color:var(--main-color);
@@ -89,7 +94,7 @@ a:hover {
   text-align: center;
 }
 .bill table td,th {
- padding:6px;
+ padding:0;
 }
 .add_table_free{
   width: 100%;
@@ -116,6 +121,18 @@ a:hover {
   -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   font-size: 1.5rem;
+}
+
+.running {
+    width: 100%;
+    background-color:red;
+    color:black;
+    border: var(--main-color);
+    border-radius: 0px 12px;
+    padding: 8px;
+    font-family: emoji;
+    font-weight: 400;
+    outline: none;
 }
 
 .login-page {
@@ -346,4 +363,7 @@ label {
   border-color:var(--fist-color);
   color: #080808;
   cursor: pointer;
+}
+.in{
+  width: 60px;
 }

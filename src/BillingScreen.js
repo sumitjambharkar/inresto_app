@@ -4,10 +4,12 @@ import 'react-tabs/style/react-tabs.css';
 import Header from './Header';
 import { db } from './firebase';
 import { useNavigate,  useParams } from 'react-router-dom';
+import useCart from './hooks/useCart';
 
 const BillingScreen = () => {
   
   const {id} = useParams()
+  const {user} = useCart()
   const  navigate= useNavigate()
   const [data,setData] = useState([])
   const [total,setTotal] = useState('')
@@ -17,7 +19,7 @@ const BillingScreen = () => {
   const [order,setOrder] = useState('')
 
   useEffect(() => {
-    db.collection(`${id}`).onSnapshot(snapshot=>(
+    db.collection("restaurants").doc(user.uid).collection(`${id}`).onSnapshot(snapshot=>(
       setData(snapshot.docs.map((doc)=>doc.data()))
     ))
   }, [])
@@ -26,14 +28,14 @@ const BillingScreen = () => {
     const rest = async()=>{
       const x = await data.reduce((acc, current) => acc + current.qty * current.price,0);
       setTotal(x)
-      const y =await total-takeAmount
+      const y = await total-takeAmount
       setRetAmount(y)
     }
     return()=> rest()
   },) 
   
   const cash = () => {
-    db.collection("bill").add({
+    db.collection("restaurants").doc(user.uid).collection("bill").add({
       table:id,
       time:new Date(),
       bill:data,
@@ -43,13 +45,12 @@ const BillingScreen = () => {
       total:total
       
     })
-    db.collection("cash").add({cash:total})
-    data.map((ele)=>db.collection(`${id}`).doc(ele.id).delete())
+    data.map((ele)=>db.collection("restaurants").doc(user.uid).collection(`${id}`).doc(ele.id).delete())
     navigate("/")
   }
 
   const card = () => {
-    db.collection("bill").add({
+    db.collection("restaurants").doc(user.uid).collection("bill").add({
       table:id,
       time:new Date(),
       bill:data,
@@ -59,14 +60,13 @@ const BillingScreen = () => {
       total:total
       
     })
-    db.collection("cash").add({card:total})
-    data.map((ele)=>db.collection(`${id}`).doc(ele.id).delete())
+    data.map((ele)=>db.collection("restaurants").doc(user.uid).collection(`${id}`).doc(ele.id).delete())
     navigate("/")
 
   }
 
   const upi = () => {
-    db.collection("bill").add({
+    db.collection("restaurants").doc(user.uid).collection("bill").add({
       table:id,
       time:new Date(),
       bill:data,
@@ -76,12 +76,11 @@ const BillingScreen = () => {
       total:total
       
     })
-    db.collection("upi").add({upi:total})
-    data.map((ele)=>db.collection(`${id}`).doc(ele.id).delete())
+    data.map((ele)=>db.collection("restaurants").doc(user.uid).collection(`${id}`).doc(ele.id).delete())
     navigate("/")
   }
   const other =()=>{
-    db.collection("bill").add({
+    db.collection("restaurants").doc(user.uid).collection("bill").add({
       table:id,
       time:new Date(),
       bill:data,
@@ -91,8 +90,7 @@ const BillingScreen = () => {
       total:total
       
     })
-    db.collection("upi").add({upi:total})
-    data.map((ele)=>db.collection(`${id}`).doc(ele.id).delete())
+    data.map((ele)=>db.collection("restaurants").doc(user.uid).collection(`${id}`).doc(ele.id).delete())
     navigate("/")
   }
   

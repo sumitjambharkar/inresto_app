@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
     const [input, setInput] = useState("")
     const [user,setUser] = useState(null)
     
-    console.log(user);
     const login =(email,password)=>{
         signInWithEmailAndPassword(auth,email,password)
         .then((result) => {
@@ -32,7 +31,7 @@ export const AuthProvider = ({ children }) => {
         setUser(user);
       });
       return unsubscribe;
-    }, []);
+    }, [user]);
     
     return (
         <AuthContext.Provider

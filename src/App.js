@@ -7,6 +7,7 @@ import LoginScreen from './LoginScreen';
 import BillingScreen from './BillingScreen';
 import useCart from './hooks/useCart';
 import Sale from './Sale';
+import AddProuct from './AddProuct';
 
 function App() {
   const {user}   = useCart()
@@ -22,6 +23,7 @@ function App() {
         <Route path='/dish/:id' element={<Dish/>}/>
         <Route path='/payment/:id' element={<BillingScreen/>}/>
         <Route path='/sale-report' element={<Sale/>}/>
+        <Route path='/add-product' element={<AddProuct/>}/>
         </>}
       </Routes>
     </Router>
