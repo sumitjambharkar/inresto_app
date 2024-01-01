@@ -34,7 +34,7 @@ const Login =()=> {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>{user.email?.charAt(0).toUpperCase()}</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>hh</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -77,7 +77,7 @@ const Login =()=> {
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          {user.email}
+        jj
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

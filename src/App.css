@@ -43,9 +43,27 @@ a:hover {
   background-color:var(--main-color);
   color: #fff;
   border: #fff;
+  text-align: center;
   border-radius:0px 12px ;
   padding: 8px;
   outline: none;
+}
+.table_box_book {
+  background-color: #535e5d;
+  margin: 2px;
+  border-radius: 12px;
+}
+.book {
+  display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #00c900;
+    color: white;
+    border: #00c900;
+    text-align: center;
+    outline: none;
+    height:110px;
 }
 .add_product {
   width: 100%;
@@ -59,10 +77,16 @@ a:hover {
   outline: none;
 
 }
+.create_button {
+  display: flex;
+    justify-content: space-around;
+}
+
 .product_box {
   background-color:var(--fist-color);
   margin: 2px;
   border-radius: 12px;
+  cursor: pointer;
 }
 .add_product_back {
   width: 100%;
@@ -76,20 +100,17 @@ a:hover {
 }
 .hide {
   width: 100%;
-  background-color:var(--fist-color);
-  color:var(--fist-color);
-  border:var(--main-color);
-  border-radius:0px 12px ;
-  padding: 8px;
-  font-family: emoji;
-  font-weight:400;
-  outline: none;
+    background-color: var(--fist-color);
+    color: var(--fist-color);
+    border: var(--main-color);
+    border-radius: 0px 12px;
+    height:110px;
+    font-family: emoji;
+    font-weight: 400;
+    outline: none;
 
 }
-.bill table, th, td  {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
+
 .bill table th {
   text-align: center;
 }
@@ -103,6 +124,7 @@ a:hover {
   border: #fff;
   border-radius:0px 12px ;
   padding: 8px;
+  text-align: center;
 }
 
 .css-i4bv87-MuiSvgIcon-root {
@@ -357,6 +379,7 @@ label {
   margin-bottom: 0.5rem;
   color: white;
 }
+
 .btn-primary {
   color: #fff;
   background-color:var(--fist-color);
@@ -367,3 +390,51 @@ label {
 .in{
   width: 60px;
 }
+
+
+
+.container_bill {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bill {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header h1 {
+  color: #333;
+}
+
+.header p {
+  color: #555;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.total {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.total strong {
+  color: #333;
+}
+
+

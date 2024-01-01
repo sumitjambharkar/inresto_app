@@ -3,10 +3,11 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { db } from "./firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useCart from "./hooks/useCart";
+import axios from "axios";
+import { TextField } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -28,12 +29,11 @@ export default function BasicModal() {
   const [price, setPrice] = useState('')
   
 
-  const addproduct =()=>{
-    db.collection("restaurants").doc(user.uid).collection("food").add({
-      name:name,
-      price:price
-    })
-    toast.success("Add Product", {
+  const addproduct =async()=>{
+    try {
+      const result = await axios.post("http://localhost:3002/create-product",{name,price,isOnline:true})
+      console.log(result.data.message);
+      toast.success("Add Product", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -44,6 +44,10 @@ export default function BasicModal() {
       theme: "colored",
     });
     handleClose()
+    window.location.reload()
+    } catch (error) {
+      
+    }
   }
 
   return (
@@ -60,15 +64,26 @@ export default function BasicModal() {
            <div style={{ textAlign:'center',width:'250px'}}>
            <h2 style={{textAlign:'center'}}>Add Product</h2><br/>
             <div>
-              <input placeholder="Product Name " onChange={(e)=>setName(e.target.value)} />
+            <TextField
+                  value={name}
+                  label="Name"
+                  onChange={(e) => setName(e.target.value)}
+                />
             </div>
             <br />
             <div>
-              <input placeholder="Price Name " onChange={(e)=>setPrice(e.target.value)}/>
+            <TextField
+                  value={price}
+                  label="Price"
+                  onChange={(e) => setPrice(e.target.value)}
+                />
             </div><br/>
             <div>
-            <button class="button-62" role="button" onClick={addproduct}>Add Product</button><p></p>
-            <button class="button-62" role="button" onClick={handleClose}>cancel</button>
+            <Button variant="contained"
+                  color="success" 
+                  onClick={addproduct}>Add Product</Button><p></p>
+            <Button variant="contained"
+                  color="error"  onClick={handleClose}>cancel</Button>
            </div>
            </div>
           </Typography>

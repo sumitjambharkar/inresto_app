@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import { db } from "./firebase";
 import useCart from "./hooks/useCart";
 import Z from "./Z";
 import Update from "./Update";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from "@mui/material";
 
 const AddProuct = () => {
   const { user } = useCart();
@@ -14,31 +16,27 @@ const AddProuct = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    db.collection("restaurants")
-      .doc(user.uid)
-      .collection("food")
-      .onSnapshot((snapshot) =>
-        setData(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })))
-      );
+    getData()
   }, []);
 
-  const productDelete = (id) => {
-    db.collection("restaurants")
-      .doc(user.uid)
-      .collection("food")
-      .doc(id)
-      .delete();
-    toast.error("Product Delete", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: 0,
-      theme: "colored",
-    });
-  };
+  const getData =async () => {
+    try {
+      const result = await axios.get("http://localhost:3002/show-all-product")
+      setData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const productDelete = async(id) => {
+   try {
+    const result = await axios.delete("http://localhost:3002/delete-single-product",{params:{id}})
+    console.log(result);
+   } catch (error) {
+    console.log(error);
+   }
+  }
+
 
   return (
     <>
@@ -62,24 +60,20 @@ const AddProuct = () => {
             <th>Delete</th>
           </tr>
 
-          {data
-            .filter(
-              (doc) =>
-                doc.data.name?.toLowerCase().indexOf(search.toLowerCase()) !==
-                -1
-            )
-            .map((doc, i) => (
-              <tr key={doc.id}>
-                <td>{i + 1}</td>
-                <td>{doc.id}</td>
-                <td>{doc.data.name} </td>
-                <td>{doc.data.price}</td>
+          
+              {data.map((doc,i)=>(
+                <tr >
+                <td>{i+1}</td>
+                <td>{doc._id}</td>
+                <td>{doc.name}</td>
+                <td>Rs.{doc.price}</td>
                 <td>
-                  <Update product={doc} />
+                  <Update doc={doc} />
                 </td>
-                <td onClick={() => productDelete(doc.id)}>X</td>
+                <td style={{cursor:"pointer"}}><IconButton onClick={()=>productDelete(doc._id)}><CloseIcon style={{color:"black"}}/></IconButton></td>
               </tr>
-            ))}
+              ))}
+      
         </table>
       </div>
       <ToastContainer />

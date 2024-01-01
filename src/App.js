@@ -8,23 +8,39 @@ import BillingScreen from './BillingScreen';
 import useCart from './hooks/useCart';
 import Sale from './Sale';
 import AddProuct from './AddProuct';
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+axios.defaults.withCredentials = true
 function App() {
-  const {user}   = useCart()
+
+  const [user,setUser] = useState("")
+
+  const getUser =async()=> {
+    try {
+      const result = await axios.get("http://localhost:3002/user",{withCredentials:true})
+      setUser(result.data.role);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  useEffect(() => {
+   getUser()
+  }, [])
   
   return (
     <>
     <Router>
       <Routes>
-        {!user?
-        <Route path='/' element={<LoginScreen/>}/>:
+        {!user?<Route path='/' element={<LoginScreen/>}/>:
         <>
         <Route path='/' element={<Home/>}/>
-        <Route path='/dish/:id' element={<Dish/>}/>
-        <Route path='/payment/:id' element={<BillingScreen/>}/>
+        <Route path='/dish' element={<Dish/>}/>
+        <Route path='/payment' element={<BillingScreen/>}/>
         <Route path='/sale-report' element={<Sale/>}/>
-        <Route path='/add-product' element={<AddProuct/>}/>
-        </>}
+        <Route path='/add-product' element={<AddProuct/>}/></>}
+ 
       </Routes>
     </Router>
     </>
