@@ -113,7 +113,11 @@ const Dish = () => {
           <div className="all_tables col-lg-8 col-md-8 col-sm-12 mt-2">
             <Search />
             <div className="row">
-              {data.map((doc) => (
+              {data
+              .filter((doc)=>doc.isOnline===true)
+              .map
+              
+              ((doc) => ( 
                 <div  onClick={() => addOrder(doc)} key={doc._id} className="table col-3">
                   <div className="product_box">
                     <button

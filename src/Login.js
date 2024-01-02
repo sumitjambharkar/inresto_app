@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useEffect,useState} from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -10,11 +10,29 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import useCart from './hooks/useCart';
+import axios from 'axios';
 
 const Login =()=> {
 
-  const {user,logout}    = useCart()
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const [user,setUser] = useState("")
+  console.log(user);
+
+  const getUser =async()=> {
+    try {
+      const result = await axios.get("http://localhost:3002/user",{withCredentials:true})
+      setUser(result.data.role);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  useEffect(() => {
+   getUser()
+  }, [])
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,7 +52,7 @@ const Login =()=> {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>hh</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>{user.charAt(0)}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -77,7 +95,7 @@ const Login =()=> {
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-        jj
+        {user}
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
@@ -85,7 +103,7 @@ const Login =()=> {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={logout}>
+        <MenuItem >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
