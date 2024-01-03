@@ -30,9 +30,8 @@ export default function BasicModal({ doc }) {
 
   const [name, setName] = useState(doc.name);
   const [price, setPrice] = useState(doc.price);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(doc.isOnline);
 
-  console.log(checked);
 
   const updateProduct = async () => {
     try {
@@ -40,19 +39,21 @@ export default function BasicModal({ doc }) {
         "http://localhost:3002/update-single-product",
         { id: doc._id, name: name, price: price,isOnline:checked }
       );
-      console.log(result.data.message);
-    } catch (error) {}
-    toast.success("Update Product", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: 0,
-      theme: "colored",
-    });
-    handleClose();
+      toast.success("Update Product", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "colored",
+      });
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   return (

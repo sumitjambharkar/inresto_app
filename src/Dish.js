@@ -14,12 +14,13 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Dish = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const location = useLocation();
   const uid = location.state;
   const [data, setData] = useState([]);
   const [order, setOrder] = useState([]);
   const [table, setTable] = useState("");
+  console.log(table);
 
   useEffect(() => {
     const getData = async () => {
@@ -102,8 +103,8 @@ const Dish = () => {
   };
 
   const payment = (id) => {
-    navigate("/payment",{state:{id:id,total:table.totalAmount}})
-  }
+    navigate("/payment", { state: { id: id, total: table.totalAmount } });
+  };
 
   return (
     <>
@@ -114,33 +115,35 @@ const Dish = () => {
             <Search />
             <div className="row">
               {data
-              .filter((doc)=>doc.isOnline===true)
-              .map
-              
-              ((doc) => ( 
-                <div  onClick={() => addOrder(doc)} key={doc._id} className="table col-3">
-                  <div className="product_box">
-                    <button
-                      style={{ outline: "none" }}
-                      className="add_product_back"
-                    >
-                      {doc.name}
-                    </button>
-                    <button
-                      style={{ outline: "none" }}
-                      className="add_product_back"
-                    >
-                      Rs. {doc.price}
-                    </button>
-                    <button
-                      style={{ outline: "none" }}
-                      className="add_product"
-                    >
-                      Add Cart
-                    </button>
+                .filter((doc) => doc.isOnline === true)
+                .map((doc) => (
+                  <div
+                    onClick={() => addOrder(doc)}
+                    key={doc._id}
+                    className="table col-3"
+                  >
+                    <div className="product_box">
+                      <button
+                        style={{ outline: "none" }}
+                        className="add_product_back"
+                      >
+                        {doc.name}
+                      </button>
+                      <button
+                        style={{ outline: "none" }}
+                        className="add_product_back"
+                      >
+                        Rs. {doc.price}
+                      </button>
+                      <button
+                        style={{ outline: "none" }}
+                        className="add_product"
+                      >
+                        Add Cart
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
 
@@ -291,7 +294,16 @@ const Dish = () => {
                     </tr>
                     <tr>
                       <th style={{ cursor: "pointer" }}>Print</th>
-                      <th onClick={()=>payment(uid.id)} style={{ cursor: "pointer" }}>Payment</th>
+                      {table.basket && table.basket.length > 0 ? (
+                        <th
+                          onClick={() => payment(uid.id)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          Payment
+                        </th>
+                      ) : (
+                        <th style={{ cursor: "pointer" }}>Payment</th>
+                      )}
                       <th></th>
                       <th></th>
                     </tr>

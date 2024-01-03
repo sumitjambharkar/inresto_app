@@ -18,7 +18,7 @@ function App() {
   const getUser =async()=> {
     try {
       const result = await axios.get("http://localhost:3002/user",{withCredentials:true})
-      setUser(result.data.role);
+      setUser(result.data.status==="Active");
     } catch (error) {
       console.log(error);
     }
