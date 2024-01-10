@@ -3,6 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import axios from "axios";
+import config from "./config";
 
 export default function ColorTabs() {
   const [value, setValue] = React.useState("one");
@@ -15,7 +16,7 @@ export default function ColorTabs() {
     const table = prompt("Enter Table No");
     try {
       if (table) {
-        const result = await axios.post("http://localhost:3002/add-table", {
+        const result = await axios.post(`${config}/add-table`, {
           table,
         });
         console.log(result);
@@ -32,7 +33,7 @@ export default function ColorTabs() {
     let table = prompt("Enter Delete Table No");
     try {
       const data = await axios.delete(
-        "http://localhost:3002/single-table-delete",
+        `${config}/single-table-delete`,
         { data: { table } }
       );
       console.log(data);

@@ -7,10 +7,11 @@ import TextField from "@mui/material/TextField";
 import Switch from "@mui/material/Switch";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import axios from "axios";
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from "@mui/material";
+import config from "./config";
 
 const style = {
   position: "absolute",
@@ -36,7 +37,7 @@ export default function BasicModal({ doc }) {
   const updateProduct = async () => {
     try {
       const result = await axios.put(
-        "http://localhost:3002/update-single-product",
+        `${config}/update-single-product`,
         { id: doc._id, name: name, price: price,isOnline:checked }
       );
       toast.success("Update Product", {

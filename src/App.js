@@ -5,30 +5,19 @@ import Home from './Home';
 import Dish from './Dish';
 import LoginScreen from './LoginScreen';
 import BillingScreen from './BillingScreen';
-import useCart from './hooks/useCart';
+import useCart from './hooks/useAuth';
 import Sale from './Sale';
 import AddProuct from './AddProuct';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from './config';
+import useAuth from './hooks/useAuth';
 axios.defaults.withCredentials = true
+
 function App() {
 
-  const [user,setUser] = useState("")
+  const {user} = useAuth()
 
-  const getUser =async()=> {
-    try {
-      const result = await axios.get("http://localhost:3002/user",{withCredentials:true})
-      setUser(result.data.status==="Active");
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-
-  useEffect(() => {
-   getUser()
-  }, [])
-  
   return (
     <>
     <Router>

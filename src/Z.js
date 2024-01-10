@@ -5,9 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import axios from "axios";
 import { TextField } from "@mui/material";
+import config from "./config";
 
 const style = {
   position: "absolute",
@@ -31,7 +32,7 @@ export default function BasicModal() {
 
   const addproduct =async()=>{
     try {
-      const result = await axios.post("http://localhost:3002/create-product",{name,price,isOnline:true})
+      const result = await axios.post(`${config}/create-product`,{name,price,isOnline:true})
       console.log(result.data.message);
       toast.success("Add Product", {
       position: "top-center",

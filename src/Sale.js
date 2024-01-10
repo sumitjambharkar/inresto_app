@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import config from "./config";
 
 const Sale = () => {
   const { user } = useCart();
@@ -11,7 +12,7 @@ const Sale = () => {
 
   const getData = async () => {
     try {
-      const result = await axios.get("http://localhost:3002/sale-report");
+      const result = await axios.get(`${config}/sale-report`);
       setSale(result.data);
     } catch (error) {
       console.log(error);

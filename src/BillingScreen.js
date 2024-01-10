@@ -3,8 +3,9 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Header from "./Header";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import axios from "axios";
+import config from "./config";
 
 const BillingScreen = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const BillingScreen = () => {
   };
   const paymet = async () => {
     try {
-      const result = await axios.post("http://localhost:3002/payment-method", {
+      const result = await axios.post(`${config}/payment-method`, {
       paymentMethod:paymentMethod?paymentMethod:"Cash",
       pickupAmount:pickupAmount,
       returnAmount:returnnn(),

@@ -3,7 +3,7 @@ import { styled, alpha } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import useCart from './hooks/useCart';
+import useCart from './hooks/useAuth';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

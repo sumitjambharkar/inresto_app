@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import Z from "./Z";
 import Update from "./Update";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from "@mui/material";
+import config from "./config";
 
 const AddProuct = () => {
   const { user } = useCart();
@@ -21,7 +22,7 @@ const AddProuct = () => {
 
   const getData =async () => {
     try {
-      const result = await axios.get("http://localhost:3002/show-all-product")
+      const result = await axios.get(`${config}/show-all-product`)
       setData(result.data);
     } catch (error) {
       console.log(error);
@@ -30,7 +31,7 @@ const AddProuct = () => {
 
   const productDelete = async(id) => {
    try {
-    const result = await axios.delete("http://localhost:3002/delete-single-product",{params:{id}})
+    const result = await axios.delete(`${config}/delete-single-product`,{params:{id}})
     console.log(result);
    } catch (error) {
     console.log(error);

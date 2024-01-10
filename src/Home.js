@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Tab from "./Tab";
 import Header from "./Header";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import axios from "axios";
+import config from "./config";
 
 const Home = () => {
   const [table, setTable] = useState([]);
@@ -15,7 +16,7 @@ const Home = () => {
 
   const getData = async () => {
     try {
-      const result = await axios.get("http://localhost:3002/show-table");
+      const result = await axios.get(`${config}/show-table`);
       setTable(result.data);
     } catch (error) {
       console.log(error);

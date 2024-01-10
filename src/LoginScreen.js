@@ -1,26 +1,18 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useCart from "./hooks/useCart";
-import axios from "axios";
 import { Button } from "@mui/material";
+import useAuth from "./hooks/useAuth";
+
 
 const LoginScreen = () => {
-  const { login } = useCart();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
 
+
   const adminLogin = async (e) => {
     e.preventDefault();
-    try {
-      const result = await axios.post("http://localhost:3002/admin-login", {
-        email: email,
-        password: password,
-      });
-      console.log(result.data.message);
-      window.location.reload()
-    } catch (error) {
-      console.log(error);
-    }
+    login({email,password})
   };
 
   return (

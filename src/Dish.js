@@ -6,12 +6,13 @@ import RemoveSharpIcon from "@mui/icons-material/RemoveSharp";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 import Tooltip from "@mui/material/Tooltip";
-import useCart from "./hooks/useCart";
+import useCart from "./hooks/useAuth";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import config from "./config";
 
 const Dish = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Dish = () => {
 
   const getOrder = async () => {
     try {
-      const result = await axios.get("http://localhost:3002/single-table", {
+      const result = await axios.get(`${config}/single-table`, {
         params: { id: uid?.id },
       });
       setOrder(result.data.basket);
